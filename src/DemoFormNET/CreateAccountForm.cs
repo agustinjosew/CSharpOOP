@@ -67,6 +67,9 @@ namespace DemoFormNET
             newAccount.DepositMoney(1000);
             newAccount.WithdrawMoney(500);
 
+            StorageUtilityFunctions.SaveAccount(newAccount);
+            Account lastAccount = StorageUtilityFunctions.GetLastAccount();
+
             DisplayAccountForm displayAccount = new DisplayAccountForm(newAccount);
 
             this.Hide();

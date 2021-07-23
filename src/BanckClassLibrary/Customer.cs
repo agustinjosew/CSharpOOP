@@ -8,29 +8,58 @@ namespace BanckClassLibrary
 {
     public class Customer
     {
-        public string        CustomerName;
-               DateTime      DateOfBirth;
-        public string        PhoneNumber;
-        public string        Address;
+        string        _CustomerName;
+        DateTime      _DateOfBirth;
+        string        _PhoneNumber;
+        string        _Address;
 
-        private Customer accountCustomer;
-
-        public Customer(string aCustomerName, DateTime aDateOfBirth,string aPhone=null,string aAddress = null)
+        public string CustomerName
         {
-            CustomerName = aCustomerName;
-            DateOfBirth  = aDateOfBirth;
-            PhoneNumber  = aPhone;
-            Address      = aAddress;
+            get
+            {
+                return _CustomerName;
+            }
+        }
+        public DateTime DateOfBirth
+        {
+            get
+            {
+                return _DateOfBirth;
+            }
+        }
+        public string PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+        }
+        public string Address
+        {
+            get
+            {
+                return _Address;
+            }
+        }
+
+        //private Customer accountCustomer;
+
+        public Customer(string aCustomerName, DateTime aDateOfBirth,string aPhoneNumber,string aAddress)
+        {
+            _CustomerName = aCustomerName;
+            _DateOfBirth  = aDateOfBirth;
+            _PhoneNumber  = aPhoneNumber;
+            _Address      = aAddress;
 
         }
 
         //Copy Constructor
         public Customer(Customer accountCustomer)
         {
-            CustomerName = accountCustomer.CustomerName;
-            DateOfBirth  = accountCustomer.DateOfBirth;
-            PhoneNumber  = accountCustomer.PhoneNumber;
-            Address      = accountCustomer.Address;
+            _CustomerName = accountCustomer._CustomerName;
+            _DateOfBirth  = accountCustomer._DateOfBirth;
+            _PhoneNumber  = accountCustomer._PhoneNumber;
+            _Address      = accountCustomer._Address;
         }
 
        

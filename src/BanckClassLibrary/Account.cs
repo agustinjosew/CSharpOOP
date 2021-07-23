@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace BanckClassLibrary
 {
     public class Account
@@ -10,82 +11,101 @@ namespace BanckClassLibrary
         private const  string EMPTY_ADDRESS   = "UNKNOWN";
         private const  string EMPTY_PHONE     = "#####";
 
-        int             AccountNumber;
+        int             _AccountNumber;
+        public int AccountNumber
+        {
+            get
+            {
+                return _AccountNumber;
+            }
+        }
 
-        Customer        AccountCustomer;
+        Customer        _AccountCustomer;        
+
         public string CustomerName
         {
             get
             {
-                return AccountCustomer.CustomerName;
+                return _AccountCustomer.CustomerName;
             }
         }    
+
+        public DateTime CustomerBirthDate
+        {
+            get
+            {
+                return _AccountCustomer.DateOfBirth;
+            }
+        }
         
         public string CustomerPhone
         {
             get
             {
-                return AccountCustomer.PhoneNumber;
+                return _AccountCustomer.PhoneNumber;
             }
 
-            set
-            {
-                if(string.IsNullOrEmpty(value))
-                {
-                    AccountCustomer.PhoneNumber = EMPTY_PHONE;
-                }
-                else
-                {
-                    AccountCustomer.PhoneNumber = value;
-                }
+            //set
+            //{
+            //    if(string.IsNullOrEmpty(value))
+            //    {
+            //        _AccountCustomer.PhoneNumber = EMPTY_PHONE;
+            //    }
+            //    else
+            //    {
+            //        _AccountCustomer.PhoneNumber = value;
+            //    }
                 
             }
-        }
+        
 
         public string CustomerAddress
         {
             get
             {
-                return AccountCustomer.Address;
+                return _AccountCustomer.Address;
             }
-            set
-            {
-                if(string.IsNullOrEmpty(value))
-                {
-                    AccountCustomer.Address = EMPTY_ADDRESS;
-                }
-                else
-                {
-                    AccountCustomer.Address = value;
-                }
+            //set
+            //{
+            //    if(string.IsNullOrEmpty(value))
+            //    {
+            //        _AccountCustomer.Address = EMPTY_ADDRESS;
+                    
+            //    }
+            //    else
+            //    {
+            //        _AccountCustomer.Address = value;
+            //    }
                 
             }
-        }
+        
 
-        double   CurrentBalance;
-        public double Balance
+        double   _CurrentBalance;
+        public double CurrentBalance
         {
             get
             {
-                return CurrentBalance;
+                return _CurrentBalance;
             }
         }
 
-        public double BalanceInForeignCurrency
+        
+
+        public double CurrentBalanceInForeignCurrency
         {
             get
             {
-                return CurrentBalance * ExchangeRate;
+                return _CurrentBalance * ExchangeRate;
             }
         }
 
 
-        List<Transaction> ListOfTransactions;      
-        public List<Transaction> TransactionList
+        List<Transaction> _ListOfTransactions;      
+        public List<Transaction> ListOfTransactions
         {
             get
             {
-                return ListOfTransactions;
+                return _ListOfTransactions;
             }
         }
 
@@ -93,10 +113,10 @@ namespace BanckClassLibrary
         {
             get
             {
-                if(ListOfTransactions.Count > 0)
+                if(_ListOfTransactions.Count > 0)
                 {
                     //return ListOfTransactions[ListOfTransactions.Count - 1];
-                    return ListOfTransactions[^1];                    
+                    return _ListOfTransactions[^1];                    
                 }
                 else
                 {
@@ -110,47 +130,52 @@ namespace BanckClassLibrary
         //Default constructor
         public Account()
         {
-            AccountCustomer    = new Customer("Admin" ,new DateTime(1995,1,1) ,null ,null);
-            AccountNumber      = Guid.NewGuid().GetHashCode();
-            CurrentBalance     = 0;
-            ListOfTransactions = new List<Transaction>();
+            _AccountCustomer    = new Customer("Admin" ,new DateTime(1995,1,1) ,null ,null);
+            _AccountNumber      = Guid.NewGuid().GetHashCode();
+            _CurrentBalance     = 0;
+            _ListOfTransactions = new List<Transaction>();
         }
 
         //Copy constructor Account
         public Account (Account aAccountToCopy)
         {
-            AccountNumber      = aAccountToCopy.AccountNumber;
-            CurrentBalance     = aAccountToCopy.CurrentBalance;
-            ListOfTransactions = new List<Transaction>();
-            for(int i          = 0; i < aAccountToCopy.ListOfTransactions.Count; i++)
+            _AccountNumber      = aAccountToCopy._AccountNumber;
+            _CurrentBalance     = aAccountToCopy._CurrentBalance;
+            _ListOfTransactions = new List<Transaction>();
+
+            for(int i= 0; i < aAccountToCopy._ListOfTransactions.Count; i++)
             {
-                ListOfTransactions.Add(aAccountToCopy.ListOfTransactions[i]);
+                _ListOfTransactions.Add(aAccountToCopy._ListOfTransactions[i]);
             }
             //Copy Customer
-            AccountCustomer = new Customer(aAccountToCopy.AccountCustomer);
+            _AccountCustomer = new Customer(aAccountToCopy._AccountCustomer);
         }
 
         public Account(string aCustomerName ,DateTime aDateOfBirth ,string aPhone = null ,string aAddress = null)
         {
-            AccountCustomer    = new Customer(aCustomerName ,aDateOfBirth ,aPhone ,aAddress);
-            AccountNumber      = Guid.NewGuid().GetHashCode();
-            CurrentBalance     = 0;
-            ListOfTransactions = new List<Transaction>();
+            _AccountCustomer    = new Customer(aCustomerName ,aDateOfBirth ,aPhone ,aAddress);
+            _AccountNumber      = Guid.NewGuid().GetHashCode();
+            _CurrentBalance     = 0;
+            _ListOfTransactions = new List<Transaction>();
+        }
+
+        public Account(int aAccountId ,string aCustomerName ,DateTime aDateOfBirth ,string aPhone = null ,string aAddress = null)
+        {
+            _AccountCustomer    = new Customer(aCustomerName ,aDateOfBirth ,aPhone ,aAddress);
+            _AccountNumber      = aAccountId;
+            _CurrentBalance     = 0;
+            _ListOfTransactions = new List<Transaction>();
         }
         #endregion CONSTRUCTORS
 
-        //metodo mostrar balance
-        void DisplayBalance()
-        {
-
-        }
+        #region METHODS
 
         public bool DepositMoney(double aAmount)
         {
             bool isSuccess = false;
-            CurrentBalance += aAmount;
+            _CurrentBalance += aAmount;
             Transaction myTransaction = new Transaction (aAmount, TransactionType.DEPOSIT);
-            ListOfTransactions.Add(myTransaction);
+            _ListOfTransactions.Add(myTransaction);
             return isSuccess;
         }
 
@@ -158,104 +183,30 @@ namespace BanckClassLibrary
         public bool WithdrawMoney(double aAmount)
         {
             bool isSuccess = false;
-            CurrentBalance -= aAmount;
+            _CurrentBalance -= aAmount;
             Transaction myTransaction = new Transaction(aAmount , TransactionType.WITDRAWAL);
-            ListOfTransactions.Add(myTransaction);
+            _ListOfTransactions.Add(myTransaction);
             return isSuccess;
         }
 
-        public class Transaction
+        public void AddTransaction(Transaction newTransaction)
         {
-            double   AmountOfTransaction;
-            DateTime TransactionDate;
-            string   Location;
-            //Transaction type
-            TransactionType TypeOfTransaction;
-
-           
-
-            public void DisplayTransaction()
+            ListOfTransactions.Add(newTransaction);
+            switch(newTransaction.TransactionTypeString)
             {
-                Console.WriteLine((TypeOfTransaction == TransactionType.DEPOSIT ? "Deposit" : "Withdraw")+ "is done.");
-                Console.WriteLine("Total amount: " + AmountOfTransaction + "Date: " + TransactionDate.ToString("yyyy/MM/dd"));
+                case "Deposit":
+                    _CurrentBalance += newTransaction.MoneyAmount;
+                    break;
+                case "Withdraw":
+                    _CurrentBalance -= newTransaction.MoneyAmount;
+                    break;
             }
-
-            //we do not want default transactions
-            private Transaction() 
-            {
-                //cannot be called
-            }
-
-            //Regular constructor
-            public Transaction(double aAmountOfTransaction, TransactionType aTransactionType)
-            {
-                AmountOfTransaction = aAmountOfTransaction;
-                TypeOfTransaction   = aTransactionType;
-                TransactionDate     = DateTime.Now;
-                Location            = "Earth";
-            }
-
-            //Copy of regular constructor
-            public Transaction(Transaction aTransactionCopy)
-            {
-                AmountOfTransaction = aTransactionCopy.AmountOfTransaction;
-                TypeOfTransaction   = aTransactionCopy.TypeOfTransaction;
-                TransactionDate     = aTransactionCopy.TransactionDate;
-                Location            = aTransactionCopy.Location;
-            }
-
-            public string Summary
-            {
-                get
-                {
-                    return   TranscationTypeString +" " + MoneyAmount + " " + DateString + " " + LocationString;
-                }
-            }
-
-            public string TranscationTypeString
-            {
-                get
-                {
-                    return (TypeOfTransaction == TransactionType.DEPOSIT ? "Deposit" : "Withdraw");
-                }
-            }
-
-            public double MoneyAmount
-            {
-                get
-                {
-                    return AmountOfTransaction;
-                }
-                set
-                {
-                    AmountOfTransaction = value;
-                }
-            }
-
-            public string DateString
-            {
-                get
-                {
-                    return (TransactionDate.ToString("yyyy/MM/dd hh:mm:dd"));
-                }
-            }
-
-            public string LocationString
-            {
-                get
-                {
-                    return Location;
-                }
-            }
-
         }
+        #endregion METHODS
 
-        public enum TransactionType
-        {
-            DEPOSIT,
-            WITDRAWAL,
-        }
+        #region NESTED TYPES
 
+        #endregion NESTED TYPES
 
     }
 }

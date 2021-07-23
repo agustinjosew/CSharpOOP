@@ -22,7 +22,7 @@ namespace DemoFormNET
             UpdateBalanceTextField();
             //BalanceControlPanel.TextInput    = myAccount.Balance.ToString();
 
-            data                               = new BindingList<Transaction>(myAccount.TransactionList);
+            data                               = new BindingList<Transaction>(myAccount.ListOfTransactions);
             listBoxTransactions.DataSource     = data; //myAccount.TransactionList;
             listBoxTransactions.DisplayMember  = "Summary";
         }
@@ -30,9 +30,9 @@ namespace DemoFormNET
         private void listBoxTransactions_SelectedIndexChanged(object sender ,System.EventArgs e)
         {
             int newIndex                       = listBoxTransactions.SelectedIndex;
-            Transaction selectedTransaction    = myAccount.TransactionList[newIndex];
+            Transaction selectedTransaction    = myAccount.ListOfTransactions[newIndex];
             
-            TransactionTypePanel.TextInput     = selectedTransaction.TranscationTypeString;
+            TransactionTypePanel.TextInput     = selectedTransaction.TransactionTypeString;
             TransactionDatePanel.TextInput     = selectedTransaction.DateString;
             TranscationAmountPanel.TextInput   = selectedTransaction.MoneyAmount.ToString();
             TransactionLocationPanel.TextInput = selectedTransaction.LocationString;       
@@ -41,7 +41,7 @@ namespace DemoFormNET
         }
         private void UpdateBalanceTextField()
         {
-            BalanceControlPanel.TextInput      = myAccount.Balance.ToString();            
+            BalanceControlPanel.TextInput = myAccount.CurrentBalance.ToString();            
         }
         private void btnDeposit_Click(object sender ,System.EventArgs e)
         {
