@@ -62,12 +62,15 @@ namespace DemoFormNET
             string phone        = PhoneTextInput;
             string address      = AddressTextInput;
 
-            Account newAccount = new Account(customerName, birthDate,phone,address);
+            Account newAccount = new Account(customerName, birthDate, phone, address);
+
+            CheckingAccount checkAccount = new CheckingAccount(-1, customerName, birthDate, phone, address);
 
             newAccount.DepositMoney(1000);
-            newAccount.WithdrawMoney(500);
+            newAccount.WithdrawMoney(500);            
 
             StorageUtilityFunctions.SaveAccount(newAccount);
+
             Account lastAccount = StorageUtilityFunctions.GetLastAccount();
 
             DisplayAccountForm displayAccount = new DisplayAccountForm(newAccount);

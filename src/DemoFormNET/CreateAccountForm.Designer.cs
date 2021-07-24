@@ -110,6 +110,7 @@ namespace DemoFormNET
             this.dtpBirthDate.Name = "dtpBirthDate";
             this.dtpBirthDate.Size = new System.Drawing.Size(221, 23);
             this.dtpBirthDate.TabIndex = 7;
+            this.dtpBirthDate.Value = new System.DateTime(1894, 1, 14, 0, 0, 0, 0);
             // 
             // txtNameCustomer
             // 
