@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BanckClassLibrary
 {
-    public class Account
+    public class Account : AccountBase
     {
         #region     FIELDS AND PROPERTIES
         public  static double ExchangeRate  = 1.1d;                    // exchange rate to foreign currency
@@ -22,11 +22,15 @@ namespace BanckClassLibrary
 
         Customer        _AccountCustomer;        
 
-        public string CustomerName
+        public override string CustomerName
         {
             get
             {
                 return _AccountCustomer.CustomerName;
+            }
+            set
+            {
+                _AccountCustomer.CustomerName = value;
             }
         }    
 
@@ -56,8 +60,7 @@ namespace BanckClassLibrary
             //        _AccountCustomer.PhoneNumber = value;
             //    }
                 
-            }
-        
+            }        
 
         public string CustomerAddress
         {
@@ -81,15 +84,13 @@ namespace BanckClassLibrary
         
 
         double   _CurrentBalance;
-        public double CurrentBalance
+        public override double CurrentBalance
         {
             get
             {
                 return _CurrentBalance;
             }
-        }
-
-        
+        }        
 
         public double CurrentBalanceInForeignCurrency
         {
@@ -98,7 +99,6 @@ namespace BanckClassLibrary
                 return _CurrentBalance * ExchangeRate;
             }
         }
-
 
         List<Transaction> _ListOfTransactions;      
         public List<Transaction> ListOfTransactions
@@ -122,6 +122,19 @@ namespace BanckClassLibrary
                 {
                     return null;
                 }
+            }
+        }
+
+        private double _Comission;
+        public override double Comission
+        {
+            get
+            {
+                return _Comission;
+            }
+            set
+            {
+                _Comission = value;
             }
         }
         #endregion FIELDS AND PROPERTIES
@@ -169,8 +182,13 @@ namespace BanckClassLibrary
         #endregion CONSTRUCTORS
 
         #region METHODS
+        //Display summary info on the console
+        public virtual void DisplayAccountInfo()
+        {
+            Console.WriteLine("Acount Id: {0} Current Balance: {1} Regular Account Type", _AccountNumber, _CurrentBalance);
+        }
 
-        public bool DepositMoney(double aAmount)
+        public override bool DepositMoney(double aAmount)
         {
             bool isSuccess = false;
             _CurrentBalance += aAmount;
@@ -179,8 +197,7 @@ namespace BanckClassLibrary
             return isSuccess;
         }
 
-
-        public bool WithdrawMoney(double aAmount)
+        public override bool WithdrawMoney(double aAmount)
         {
             bool isSuccess = false;
             _CurrentBalance -= aAmount;
@@ -189,9 +206,10 @@ namespace BanckClassLibrary
             return isSuccess;
         }
 
-        public void AddTransaction(Transaction newTransaction)
+        protected sealed override void AddTransaction(Transaction newTransaction)
         {
             ListOfTransactions.Add(newTransaction);
+
             switch(newTransaction.TransactionTypeString)
             {
                 case "Deposit":
@@ -201,6 +219,18 @@ namespace BanckClassLibrary
                     _CurrentBalance -= newTransaction.MoneyAmount;
                     break;
             }
+        }
+
+        public void DepositMoney(double transactionAmount ,DateTime transactionDate ,string transactionLocation)
+        {
+           Transaction newTransaction   = new Transaction(transactionAmount, "Deposit", transactionDate, transactionLocation);
+            this.AddTransaction(newTransaction);
+        }
+
+        public void WithdrawMoney(double transactionAmount ,DateTime transactionDate ,string transactionLocation)
+        {
+            Transaction newTransaction = new Transaction(transactionAmount, "Withdraw", transactionDate, transactionLocation);
+            this.AddTransaction(newTransaction);
         }
         #endregion METHODS
 

@@ -19,6 +19,10 @@ namespace BanckClassLibrary
             {
                 return _CustomerName;
             }
+            set
+            {
+                _CustomerName = value;
+            }
         }
         public DateTime DateOfBirth
         {

@@ -101,7 +101,19 @@ namespace DemoFormNET
                     DateTime transactionDate     = DateTime.ParseExact(transactionParts[2], DateStringFormat,null);
                     string transactionLocation   = transactionParts[3];
 
-                    Transaction newTransaction   = new Transaction(transactionAmount, transactionType, transactionDate, transactionLocation);
+                    switch(transactionType)
+                    {
+                        case "Deposit":
+                            lastAccount.DepositMoney(transactionAmount,transactionDate,transactionLocation);
+                            break;
+                        case "Withdraw":
+                            lastAccount.WithdrawMoney(transactionAmount,transactionDate,transactionLocation);
+                            break;
+                    }
+
+                   
+
+                    //Transaction newTransaction   = new Transaction(transactionAmount, transactionType, transactionDate, transactionLocation);
 
                     lastAccount.AddTransaction(newTransaction);
                 }

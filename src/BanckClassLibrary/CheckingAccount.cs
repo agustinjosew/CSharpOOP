@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BanckClassLibrary
 {
-    public class CheckingAccount : Account
+    public sealed class CheckingAccount : Account
     {
         public CheckingAccount() : base()
         {
@@ -17,6 +17,21 @@ namespace BanckClassLibrary
                                 :base(aAccountId ,aCustomerName ,aDateOfBirth ,aPhone ,aAddress)
         {
 
+        }
+
+        public override void DisplayAccountInfo()
+        {
+            Console.WriteLine("Checking account balance: {0}, Comission: {1}",CurrentBalance, Comission);
+        }
+
+        public override bool DepositMoney(double aAmount)
+        {
+            return base.DepositMoney(aAmount);
+        }
+
+        public override bool WithdrawMoney(double aAmount)
+        {
+            return base.WithdrawMoney(aAmount);
         }
     }
 }
