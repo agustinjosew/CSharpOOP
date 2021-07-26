@@ -115,7 +115,7 @@ namespace DemoFormNET
 
                     //Transaction newTransaction   = new Transaction(transactionAmount, transactionType, transactionDate, transactionLocation);
 
-                    lastAccount.AddTransaction(newTransaction);
+                    //lastAccount.AddTransaction(newTransaction);
                 }
 
             }

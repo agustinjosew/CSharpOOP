@@ -137,6 +137,8 @@ namespace BanckClassLibrary
                 _Comission = value;
             }
         }
+
+
         #endregion FIELDS AND PROPERTIES
 
         #region CONSTRUCTORS

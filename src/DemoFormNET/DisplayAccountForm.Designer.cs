@@ -106,6 +106,7 @@ namespace DemoFormNET
             this.txtDeposit.Name = "txtDeposit";
             this.txtDeposit.Size = new System.Drawing.Size(122, 23);
             this.txtDeposit.TabIndex = 6;
+            this.txtDeposit.Text = "1000";
             // 
             // btnDeposit
             // 
@@ -133,6 +134,7 @@ namespace DemoFormNET
             this.txtWithdraw.Name = "txtWithdraw";
             this.txtWithdraw.Size = new System.Drawing.Size(122, 23);
             this.txtWithdraw.TabIndex = 8;
+            this.txtWithdraw.Text = "500";
             // 
             // BalanceControlPanel
             // 

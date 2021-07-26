@@ -62,25 +62,32 @@ namespace DemoFormNET
             string phone        = PhoneTextInput;
             string address      = AddressTextInput;
 
-            Account newAccount = new Account(customerName, birthDate, phone, address);
+            //Account newAccount = new Account(customerName, birthDate, phone, address);
 
             CheckingAccount newCheckingAccount = new CheckingAccount(-1, customerName, birthDate, phone, address);
+            SavingsAccount newSavingAccount    = new SavingsAccount(-1, customerName, birthDate, phone, address);
 
-            newAccount.DepositMoney(1000);
-            newAccount.WithdrawMoney(500);
+            //newAccount.DepositMoney(1000);
+            //newAccount.WithdrawMoney(500);
 
-            newAccount.DisplayAccountInfo();
-            newCheckingAccount.DisplayAccountInfo();
+            //newAccount.DisplayAccountInfo();
+            //newCheckingAccount.DisplayAccountInfo();
 
-            StorageUtilityFunctions.SaveAccount(newAccount);
+            //StorageUtilityFunctions.SaveAccount(newAccount);
+            //Account lastAccount = StorageUtilityFunctions.GetLastAccount();
 
-            Account lastAccount = StorageUtilityFunctions.GetLastAccount();
+            //DisplayAccountForm displayAccount = new DisplayAccountForm(newAccount);
+            DisplayAccountForm displayAccount1 = new DisplayAccountForm(newCheckingAccount);
+            displayAccount1.Text = "Checking Account";
 
-            DisplayAccountForm displayAccount = new DisplayAccountForm(newAccount);
+            DisplayAccountForm displayAccount2 = new DisplayAccountForm(newSavingAccount);
+            displayAccount2.Text = "Savings Account";
 
             this.Hide();
-            displayAccount.ShowDialog();
-            this.Show();
+            //displayAccount.ShowDialog();
+            displayAccount1.Show();
+            displayAccount2.Show();
+            //this.Show();
 
         }
 
