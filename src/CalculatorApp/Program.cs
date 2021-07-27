@@ -16,10 +16,23 @@ namespace CalculatorApp
 
             Calculator myCalculator = new Calculator();
 
-            int resultOne     = myCalculator.Add(x,y);
-            int resultTwo     = myCalculator.Substract(x,y);
+            int   resultOne   = myCalculator.Add(x,y);
+            int   resultTwo   = myCalculator.Substract(x,y);
             float resultThree = myCalculator.Divide(x,y);
             Int64 resultFour  = myCalculator.Multiply(x,y);
+
+            AdvancedCalculator myAdvancedCalculator = new AdvancedCalculator();
+
+            resultOne   = myCalculator.Add(x ,y);
+            resultTwo   = myCalculator.Substract(x ,y);
+            resultThree = myCalculator.Divide(x ,y);
+            resultFour  = myCalculator.Multiply(x ,y);
+
+            long   resultFive  = myAdvancedCalculator.Cube(x);
+            long   resultSix   = myAdvancedCalculator.Square(x);
+            double resultSeven = myAdvancedCalculator.SquareRoot(x);
+
+
         }
     }
 }
