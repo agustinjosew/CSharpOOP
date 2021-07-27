@@ -46,7 +46,12 @@ namespace DemoFormNET
         private void btnDeposit_Click(object sender ,System.EventArgs e)
         {
             double depositAmount = Convert.ToDouble(txtDeposit.Text.ToString());
-            myAccount.DepositMoney(depositAmount);
+            if(!myAccount.DepositMoney(depositAmount))
+            {
+                MessageBox.Show("Deposit request is not valid");
+                return;
+            }
+           
             UpdateBalanceTextField();
             data.ResetBindings();
         }
@@ -54,7 +59,11 @@ namespace DemoFormNET
         private void btnWithdraw_Click(object sender ,EventArgs e)
         {
             double WithdrawAmount = Convert.ToDouble(txtWithdraw.Text.ToString());
-            myAccount.WithdrawMoney(WithdrawAmount);
+            if(!myAccount.WithdrawMoney(WithdrawAmount))
+            {
+                MessageBox.Show("Withdraw request is not valid");
+                return;
+            }
             UpdateBalanceTextField();
             data.ResetBindings();
         }

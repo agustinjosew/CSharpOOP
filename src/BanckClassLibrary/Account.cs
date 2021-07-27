@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BanckClassLibrary
 {
-    public class Account : AccountBase
+    public class Account : AccountBase, IAccountValidatable
     {
         #region     FIELDS AND PROPERTIES
         public  static double ExchangeRate  = 1.1d;                    // exchange rate to foreign currency
@@ -192,19 +192,32 @@ namespace BanckClassLibrary
 
         public override bool DepositMoney(double aAmount)
         {
-            bool isSuccess = false;
+            bool isSuccess = true;
+
             _CurrentBalance += aAmount;
+
             Transaction myTransaction = new Transaction (aAmount, TransactionType.DEPOSIT);
             _ListOfTransactions.Add(myTransaction);
+
             return isSuccess;
         }
 
         public override bool WithdrawMoney(double aAmount)
         {
-            bool isSuccess = false;
-            _CurrentBalance -= aAmount;
-            Transaction myTransaction = new Transaction(aAmount , TransactionType.WITDRAWAL);
-            _ListOfTransactions.Add(myTransaction);
+            bool isSuccess = true;
+
+            if(_CurrentBalance < aAmount)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                _CurrentBalance -= aAmount;
+
+                Transaction myTransaction = new Transaction(aAmount , TransactionType.WITDRAWAL);
+                _ListOfTransactions.Add(myTransaction);
+            }            
+
             return isSuccess;
         }
 
@@ -233,6 +246,36 @@ namespace BanckClassLibrary
         {
             Transaction newTransaction = new Transaction(transactionAmount, "Withdraw", transactionDate, transactionLocation);
             this.AddTransaction(newTransaction);
+        }
+
+        public bool IscustomerNameValid(string aCustomerName)
+        {
+            if(!string.IsNullOrEmpty(aCustomerName) &&
+                aCustomerName.Length > 2 &&
+                aCustomerName.Length < 26)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsBirthDateValid(DateTime aBirthdate)
+        {
+            if(DateTime.Compare(aBirthdate ,new DateTime(DateTime.Now.Year - 18 ,12 ,31)) > 0)
+            {
+                return false;
+            };
+            return true;
+        }
+
+        public virtual bool IsDepositMoneyRequestValid(double aMoneyAmount)
+        {
+            return true;
+        }
+
+        public virtual bool IsWithdrawMoneyRequestValid(double aMoneyAmount)
+        {
+            return true;
         }
         #endregion METHODS
 
