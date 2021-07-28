@@ -57,7 +57,7 @@
             // xInputBox
             // 
             this.xInputBox.Location = new System.Drawing.Point(39, 31);
-            this.xInputBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.xInputBox.Margin = new System.Windows.Forms.Padding(2);
             this.xInputBox.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -70,7 +70,7 @@
             // yInputBox
             // 
             this.yInputBox.Location = new System.Drawing.Point(39, 57);
-            this.yInputBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.yInputBox.Margin = new System.Windows.Forms.Padding(2);
             this.yInputBox.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -93,7 +93,7 @@
             // AddButton
             // 
             this.AddButton.Location = new System.Drawing.Point(9, 80);
-            this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(97, 19);
             this.AddButton.TabIndex = 4;
@@ -104,7 +104,7 @@
             // SubtractButton
             // 
             this.SubtractButton.Location = new System.Drawing.Point(9, 103);
-            this.SubtractButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SubtractButton.Margin = new System.Windows.Forms.Padding(2);
             this.SubtractButton.Name = "SubtractButton";
             this.SubtractButton.Size = new System.Drawing.Size(97, 19);
             this.SubtractButton.TabIndex = 5;
@@ -115,27 +115,29 @@
             // DivideButton
             // 
             this.DivideButton.Location = new System.Drawing.Point(9, 127);
-            this.DivideButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DivideButton.Margin = new System.Windows.Forms.Padding(2);
             this.DivideButton.Name = "DivideButton";
             this.DivideButton.Size = new System.Drawing.Size(97, 19);
             this.DivideButton.TabIndex = 6;
             this.DivideButton.Text = "Divide";
             this.DivideButton.UseVisualStyleBackColor = true;
+            this.DivideButton.Click += new System.EventHandler(this.DivideButton_Click);
             // 
             // MultiplyButton
             // 
             this.MultiplyButton.Location = new System.Drawing.Point(9, 150);
-            this.MultiplyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MultiplyButton.Margin = new System.Windows.Forms.Padding(2);
             this.MultiplyButton.Name = "MultiplyButton";
             this.MultiplyButton.Size = new System.Drawing.Size(97, 19);
             this.MultiplyButton.TabIndex = 7;
             this.MultiplyButton.Text = "Multiply";
             this.MultiplyButton.UseVisualStyleBackColor = true;
+            this.MultiplyButton.Click += new System.EventHandler(this.MultiplyButton_Click);
             // 
             // SquareButton
             // 
             this.SquareButton.Location = new System.Drawing.Point(9, 174);
-            this.SquareButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SquareButton.Margin = new System.Windows.Forms.Padding(2);
             this.SquareButton.Name = "SquareButton";
             this.SquareButton.Size = new System.Drawing.Size(97, 19);
             this.SquareButton.TabIndex = 8;
@@ -146,7 +148,7 @@
             // SquareRootButton
             // 
             this.SquareRootButton.Location = new System.Drawing.Point(9, 197);
-            this.SquareRootButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SquareRootButton.Margin = new System.Windows.Forms.Padding(2);
             this.SquareRootButton.Name = "SquareRootButton";
             this.SquareRootButton.Size = new System.Drawing.Size(97, 19);
             this.SquareRootButton.TabIndex = 9;
@@ -157,7 +159,7 @@
             // ResultTextBox
             // 
             this.ResultTextBox.Location = new System.Drawing.Point(28, 230);
-            this.ResultTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ResultTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.ResultTextBox.Name = "ResultTextBox";
             this.ResultTextBox.ReadOnly = true;
             this.ResultTextBox.Size = new System.Drawing.Size(76, 20);
@@ -193,7 +195,7 @@
             this.Controls.Add(this.xInputBox);
             this.Controls.Add(this.XLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CalculatorForm";
